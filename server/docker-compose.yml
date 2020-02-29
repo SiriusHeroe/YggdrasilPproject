@@ -1,0 +1,71 @@
+version: '2.1'
+services:
+  ds-yggdrasil:
+    build:
+      context: .
+      args:
+        WAR_FILE: "ds-yggdrasil-server.war"
+    image: mindmeal/ds-yggdrasil:1
+    container_name: ds-yggdrasil
+    hostname: ds-yggdrasil
+    volumes:
+      - ./docker/payara/logs/:/opt/payara41/glassfish/domains/yggdrasil_domain/logs
+      - ./target:/opt/payara/target
+#    environment:
+#      - DISPATCHER_SERVICE_URL=http://feg-api-mock:8080/api-dispatcher
+    expose:
+      - "9090"
+    ports:
+      - "54848:4848"
+      - "58080:8080"
+      - "58009:8009"
+      - "58181:8181"
+      - "55005:5005"
+      - "59009:9009"
+      - "59090:9090"
+    environment:
+      - MQ_USERNAME=admin
+      - MQ_PASSWORD=admin
+    networks:
+      - besynext_network
+
+  ds-yggdrasil-postgres:
+    image: postgres:9.5.4
+    container_name: ds-yggdrasil-postgres
+    hostname: ds-yggdrasil-postgres
+    environment:
+      - POSTGRES_USER=mindmeal
+      - POSTGRES_PASSWORD=mindmeal
+      - POSTGRES_DB=mindmeal
+    ports:
+      - "37432:5432"
+    volumes:
+      - ./sql/init-db:/docker-entrypoint-initdb.d
+    networks:
+      - mindmeal_network
+    healthcheck:
+      test: ["CMD-SHELL", "psql -U mindmeal -d mindmeal -t 15 -c 'SELECT 1'"]
+      interval: 5s
+      timeout: 15s
+      retries: 10
+
+  ds-yggdrasilflyway:
+    image: boxfuse/flyway:5.2.1
+    container_name: ds-yggdrasil-flyway
+    command: -url=jdbc:postgresql://ds-yggdrasil-postgres:5432/besynext -placeholders.connectUser=mindmeal -baselineOnMigrate=true -baselineVersion=0.1 -user=besynext -password=mindmeal -schemas=ds-yggdrasil -cleanDisabled=true migrate
+    volumes:
+      - ./sql/yggdrasil:/flyway/sql
+    depends_on:
+      ds-yggdrasil-postgres:
+        condition: service_healthy
+    networks:
+      - mindmeal_network
+
+
+networks:
+   besynext_network:
+     external: true
+     name: mindmeal_network
+
+
+
