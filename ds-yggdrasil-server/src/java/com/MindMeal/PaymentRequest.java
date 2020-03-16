@@ -1,4 +1,4 @@
-package java;
+package com.MindMeal;
 
 public class PaymentRequest {
 

@@ -1,4 +1,4 @@
-package java;
+package com.MindMeal;
 
 import org.springframework.web.bind.annotation.*;
 
