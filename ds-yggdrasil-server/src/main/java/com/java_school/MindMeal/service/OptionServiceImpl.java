@@ -1,9 +1,11 @@
 package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.Option;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class OptionServiceImpl implements OptionService {
     // Storadge option
     private static final Map<String, Option> OPTION_HASH_MAP = new HashMap<>();

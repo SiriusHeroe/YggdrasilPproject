@@ -1,9 +1,11 @@
 package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.Tarif;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class TarifServiceImpl implements TarifService{
     // Storadge tarif
     private static final Map<String, Tarif> TARIF_HASH_MAP = new HashMap<>();

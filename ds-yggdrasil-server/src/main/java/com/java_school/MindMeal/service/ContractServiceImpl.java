@@ -1,9 +1,11 @@
 package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.Contract;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class ContractServiceImpl implements ContractService{
     // Storadge Contracts
     private static final Map<String, Contract> CONTRACT_HASH_MAP = new HashMap<>();

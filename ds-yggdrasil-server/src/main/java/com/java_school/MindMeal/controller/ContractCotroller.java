@@ -18,13 +18,13 @@ public class ContractCotroller {
         this.contractService = contractService;
     }
 
-    @PostMapping(value = "/contract")
+    @PostMapping(value = "/contracts")
     public ResponseEntity<?> create(@RequestBody Contract contract) {
         contractService.create(contract);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/contract")
+    @GetMapping(value = "/contracts")
     public ResponseEntity<List<Contract>> read() {
         final List<Contract> contracts = contractService.readAll();
 
@@ -33,7 +33,7 @@ public class ContractCotroller {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/contract/{id}")
+    @GetMapping(value = "/contracts/{id}")
     public ResponseEntity<Contract> read(@PathVariable(name = "id") String id) {
         final Contract contracts = contractService.read(id);
 
@@ -42,16 +42,16 @@ public class ContractCotroller {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/contract/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") String  id, @RequestBody Contract contract) {
-        final boolean updated = contractService.update(contract, id);
+    @PutMapping(value = "/contracts/{id}")
+    public ResponseEntity<?> update(@PathVariable(name = "id") String  id, @RequestBody Contract contracts) {
+        final boolean updated = contractService.update(contracts, id);
 
         return updated
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @DeleteMapping(value = "/contract/{id}")
+    @DeleteMapping(value = "/contracts/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") String  id) {
         final boolean deleted = contractService.delete(id);
 

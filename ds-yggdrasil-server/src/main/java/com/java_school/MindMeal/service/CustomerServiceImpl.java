@@ -1,9 +1,11 @@
 package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.Customer;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class CustomerServiceImpl implements CustomerService {
     // Storadge Customers
     private static final Map<String, Customer> CUSTOMER_HASH_MAP = new HashMap<>();
