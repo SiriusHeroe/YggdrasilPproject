@@ -32,10 +32,10 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean update(User client, String id) {
+    public boolean update(User user, String id) {
         if (USER_HASH_MAP.containsKey(id)) {
-            client.setId(id);
-            USER_HASH_MAP.put(id, client);
+            user.setId(id);
+            USER_HASH_MAP.put(id, user);
             return true;
         }
 

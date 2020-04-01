@@ -5,7 +5,7 @@ import com.java_school.MindMeal.model.Tarif;
 import java.util.*;
 
 public class TarifServiceImpl implements TarifService{
-    // Storadge users
+    // Storadge tarif
     private static final Map<String, Tarif> TARIF_HASH_MAP = new HashMap<>();
 
     // Variable for generate uuid
