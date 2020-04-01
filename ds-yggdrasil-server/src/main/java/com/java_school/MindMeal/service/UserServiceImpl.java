@@ -16,9 +16,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void create(User user) {
-        final String clientId = USER_UUID.randomUUID().toString();
-        user.setId(clientId);
-        USER_HASH_MAP.put(clientId, user);
+        final String userId = USER_UUID.randomUUID().toString();
+        user.setId(userId);
+        USER_HASH_MAP.put(userId, user);
     }
 
     @Override
