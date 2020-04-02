@@ -1,40 +1,40 @@
 package com.java_school.MindMeal.service;
 
-import com.java_school.MindMeal.model.Tarif;
+import com.java_school.MindMeal.model.Tariff;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class TarifServiceImpl implements TarifService{
+public class TariffServiceImpl implements TariffService {
     // Storadge tarif
-    private static final Map<String, Tarif> TARIF_HASH_MAP = new HashMap<>();
+    private static final Map<String, Tariff> TARIF_HASH_MAP = new HashMap<>();
 
     // Variable for generate uuid
     private static final UUID TARIF_UUID = null;
 
     @Override
-    public void create(Tarif tarif) {
+    public void create(Tariff tariff) {
         final String tarifId = TARIF_UUID.randomUUID().toString();
-        tarif.setId(tarifId);
-        TARIF_HASH_MAP.put(tarifId, tarif);
+        tariff.setId(tarifId);
+        TARIF_HASH_MAP.put(tarifId, tariff);
     }
 
     @Override
-    public List<Tarif> readAll() {
+    public List<Tariff> readAll() {
         return new ArrayList<>(TARIF_HASH_MAP.values());
     }
 
     @Override
-    public Tarif read(String id) {
+    public Tariff read(String id) {
         return TARIF_HASH_MAP.get(id);
     }
 
     @Override
-    public boolean update(Tarif tarif, String id) {
+    public boolean update(Tariff tariff, String id) {
         if (TARIF_HASH_MAP.containsKey(id)) {
-            tarif.setId(id);
-            TARIF_HASH_MAP.put(id, tarif);
+            tariff.setId(id);
+            TARIF_HASH_MAP.put(id, tariff);
             return true;
         }
 

@@ -1,6 +1,6 @@
 package com.java_school.MindMeal.model;
 
-public class Tarif {
+public class Tariff {
 
     private String id;
     private String name;

@@ -4,7 +4,8 @@ public class Contract {
 
     private String id;
     private String number;
-    private String contract_id;
+    private String customer_id;
+    private String tariff_id;
     private Double total_price;
     private String option_list_id;
     private Boolean deleted;
@@ -25,12 +26,12 @@ public class Contract {
         this.number = number;
     }
 
-    public String getContract_id() {
-        return contract_id;
+    public String getCustomer_id() {
+        return customer_id;
     }
 
-    public void setContract_id(String contract_id) {
-        this.contract_id = contract_id;
+    public void setCustomer_id(String customer_id) {
+        this.customer_id = customer_id;
     }
 
     public Double getTotal_price() {
@@ -57,4 +58,11 @@ public class Contract {
         this.deleted = deleted;
     }
 
+    public String getTariff_id() {
+        return tariff_id;
+    }
+
+    public void setTariff_id(String tariff_id) {
+        this.tariff_id = tariff_id;
+    }
 }
