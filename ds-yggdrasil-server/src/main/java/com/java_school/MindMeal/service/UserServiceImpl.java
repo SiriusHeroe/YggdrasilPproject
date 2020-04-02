@@ -5,14 +5,17 @@ import com.java_school.MindMeal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    // Storadge users
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public void create(User user) {
@@ -25,12 +28,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User read(UUID id) {
-        return userRepository.getOne(id);
+    public User read(String id) {
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
-    public boolean update(User user, UUID id) {
+    public boolean update(User user, String id) {
         if (userRepository.existsById(id)) {
             user.setId(id);
             userRepository.save(user);
@@ -40,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(UUID id) {
+    public boolean delete(String id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return true;

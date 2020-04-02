@@ -10,7 +10,7 @@ CREATE SCHEMA IF NOT EXISTS DS_OPTION;
 -- /* Add tables                                                             */
 -- /* ---------------------------------------------------------------------- */
 CREATE TABLE DS_USER.T_USER (
-  ID UUID PRIMARY KEY,
+  ID VARCHAR(36) PRIMARY KEY,
   EMAIL VARCHAR(254) NOT NULL,
   PASSWORD VARCHAR(36) NOT NULL,
   ROLE VARCHAR(10) NOT NULL,

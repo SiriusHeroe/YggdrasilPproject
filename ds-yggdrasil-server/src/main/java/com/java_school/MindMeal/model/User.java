@@ -3,7 +3,6 @@ package com.java_school.MindMeal.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(schema = "ds_user",name = "t_user")
@@ -12,7 +11,7 @@ public class User {
     @Column(name = "id", unique = true)
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private UUID id;
+    private String id;
 
     @Column(name = "email")
     private String email;
@@ -30,11 +29,11 @@ public class User {
     private Boolean deleted;
 
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
