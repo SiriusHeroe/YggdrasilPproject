@@ -1,48 +1,53 @@
 package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.Tariff;
+import com.java_school.MindMeal.repository.TariffRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+
 
 @Service
 public class TariffServiceImpl implements TariffService {
-    // Storadge tarif
-    private static final Map<String, Tariff> TARIF_HASH_MAP = new HashMap<>();
 
-    // Variable for generate uuid
-    private static final UUID TARIF_UUID = null;
+    private final TariffRepository tariffRepository;
+
+    public TariffServiceImpl(TariffRepository tariffRepository) {
+        this.tariffRepository = tariffRepository;
+    }
 
     @Override
     public void create(Tariff tariff) {
-        final String tarifId = TARIF_UUID.randomUUID().toString();
-        tariff.setId(tarifId);
-        TARIF_HASH_MAP.put(tarifId, tariff);
+        tariffRepository.save(tariff);
     }
 
     @Override
     public List<Tariff> readAll() {
-        return new ArrayList<>(TARIF_HASH_MAP.values());
+        return tariffRepository.findAll();
     }
 
     @Override
     public Tariff read(String id) {
-        return TARIF_HASH_MAP.get(id);
+        return tariffRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
     public boolean update(Tariff tariff, String id) {
-        if (TARIF_HASH_MAP.containsKey(id)) {
+        if (tariffRepository.existsById(id)) {
             tariff.setId(id);
-            TARIF_HASH_MAP.put(id, tariff);
+            tariffRepository.save(tariff);
             return true;
         }
-
         return false;
     }
 
     @Override
     public boolean delete(String id) {
-        return TARIF_HASH_MAP.remove(id) != null;
+        if (tariffRepository.existsById(id)) {
+            tariffRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

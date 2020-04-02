@@ -1,16 +1,39 @@
 package com.java_school.MindMeal.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(schema = "ds_customer",name = "t_customer")
 public class Customer {
 
+    @Id
+    @Column(name = "id", unique = true)
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "last_name")
     private String last_name;
+
+    @Column(name = "birthday")
     private Date birthday;
+
+    @Column(name = "passport_num")
     private String passport_num;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "deleted")
     private Boolean deleted;
 
     public String getId() {

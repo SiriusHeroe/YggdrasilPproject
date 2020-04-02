@@ -2,7 +2,6 @@ package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.User;
 import com.java_school.MindMeal.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;

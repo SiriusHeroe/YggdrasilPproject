@@ -1,12 +1,32 @@
 package com.java_school.MindMeal.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+@Entity
+@Table(schema = "ds_tariff",name = "t_tariff")
 public class Tariff {
 
+    @Id
+    @Column(name = "id", unique = true)
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "price")
     private Double price;
+
+    @Column(name = "option_list_id")
     private String option_list_id;
+
+    @Column(name = "deleted")
     private Boolean deleted;
 
     public String getId() {

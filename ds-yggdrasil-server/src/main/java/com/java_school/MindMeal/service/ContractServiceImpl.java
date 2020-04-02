@@ -1,48 +1,54 @@
 package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.Contract;
+import com.java_school.MindMeal.model.User;
+import com.java_school.MindMeal.repository.ContractRepository;
+import com.java_school.MindMeal.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
 public class ContractServiceImpl implements ContractService{
-    // Storadge Contracts
-    private static final Map<String, Contract> CONTRACT_HASH_MAP = new HashMap<>();
 
-    // Variable for generate uuid
-    private static final UUID CONTRACT_UUID = null;
+    private final ContractRepository contractRepository;
+
+    public ContractServiceImpl(ContractRepository contractRepository) {
+        this.contractRepository = contractRepository;
+    }
 
     @Override
     public void create(Contract contract) {
-        final String ContractId = CONTRACT_UUID.randomUUID().toString();
-        contract.setId(ContractId);
-        CONTRACT_HASH_MAP.put(ContractId, contract);
+        contractRepository.save(contract);
     }
 
     @Override
     public List<Contract> readAll() {
-        return new ArrayList<>(CONTRACT_HASH_MAP.values());
+        return contractRepository.findAll();
     }
 
     @Override
     public Contract read(String id) {
-        return CONTRACT_HASH_MAP.get(id);
+        return contractRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
     public boolean update(Contract contract, String id) {
-        if (CONTRACT_HASH_MAP.containsKey(id)) {
+        if (contractRepository.existsById(id)) {
             contract.setId(id);
-            CONTRACT_HASH_MAP.put(id, contract);
+            contractRepository.save(contract);
             return true;
         }
-
         return false;
     }
 
     @Override
     public boolean delete(String id) {
-        return CONTRACT_HASH_MAP.remove(id) != null;
+        if (contractRepository.existsById(id)) {
+            contractRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

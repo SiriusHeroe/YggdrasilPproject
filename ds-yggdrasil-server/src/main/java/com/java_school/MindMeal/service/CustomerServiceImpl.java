@@ -1,48 +1,52 @@
 package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.Customer;
+import com.java_school.MindMeal.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    // Storadge Customers
-    private static final Map<String, Customer> CUSTOMER_HASH_MAP = new HashMap<>();
+    
+    private final CustomerRepository customerRepository;
 
-    // Variable for generate uuid
-    private static final UUID CUSTOMER_UUID = null;
+    public CustomerServiceImpl(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public void create(Customer customer) {
-        final String customerId = CUSTOMER_UUID.randomUUID().toString();
-        customer.setId(customerId);
-        CUSTOMER_HASH_MAP.put(customerId, customer);
+        customerRepository.save(customer);
     }
 
     @Override
     public List<Customer> readAll() {
-        return new ArrayList<>(CUSTOMER_HASH_MAP.values());
+        return customerRepository.findAll();
     }
 
     @Override
     public Customer read(String id) {
-        return CUSTOMER_HASH_MAP.get(id);
+        return customerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
     public boolean update(Customer customer, String id) {
-        if (CUSTOMER_HASH_MAP.containsKey(id)) {
+        if (customerRepository.existsById(id)) {
             customer.setId(id);
-            CUSTOMER_HASH_MAP.put(id, customer);
+            customerRepository.save(customer);
             return true;
         }
-
         return false;
     }
 
     @Override
     public boolean delete(String id) {
-        return CUSTOMER_HASH_MAP.remove(id) != null;
+        if (customerRepository.existsById(id)) {
+            customerRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

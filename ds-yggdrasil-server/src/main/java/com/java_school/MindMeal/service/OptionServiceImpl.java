@@ -1,48 +1,52 @@
 package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.Option;
+import com.java_school.MindMeal.repository.OptionRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
 public class OptionServiceImpl implements OptionService {
-    // Storadge option
-    private static final Map<String, Option> OPTION_HASH_MAP = new HashMap<>();
 
-    // Variable for generate uuid
-    private static final UUID OPTION_UUID = null;
+    private final OptionRepository optionRepository;
+
+    public OptionServiceImpl(OptionRepository optionRepository) {
+        this.optionRepository = optionRepository;
+    }
 
     @Override
     public void create(Option option) {
-        final String optionId = OPTION_UUID.randomUUID().toString();
-        option.setId(optionId);
-        OPTION_HASH_MAP.put(optionId, option);
+        optionRepository.save(option);
     }
 
     @Override
     public List<Option> readAll() {
-        return new ArrayList<>(OPTION_HASH_MAP.values());
+        return optionRepository.findAll();
     }
 
     @Override
     public Option read(String id) {
-        return OPTION_HASH_MAP.get(id);
+        return optionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
     public boolean update(Option option, String id) {
-        if (OPTION_HASH_MAP.containsKey(id)) {
+        if (optionRepository.existsById(id)) {
             option.setId(id);
-            OPTION_HASH_MAP.put(id, option);
+            optionRepository.save(option);
             return true;
         }
-
         return false;
     }
 
     @Override
     public boolean delete(String id) {
-        return OPTION_HASH_MAP.remove(id) != null;
+        if (optionRepository.existsById(id)) {
+            optionRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
