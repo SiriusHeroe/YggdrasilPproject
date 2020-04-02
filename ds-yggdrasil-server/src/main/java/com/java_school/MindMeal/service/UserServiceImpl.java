@@ -1,49 +1,51 @@
 package com.java_school.MindMeal.service;
 
 import com.java_school.MindMeal.model.User;
+import com.java_school.MindMeal.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     // Storadge users
-    private static final Map<String, User> USER_HASH_MAP = new HashMap<>();
-
-    // Variable for generate uuid
-    private static final UUID USER_UUID = null;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public void create(User user) {
-        final String userId = USER_UUID.randomUUID().toString();
-        user.setId(userId);
-        USER_HASH_MAP.put(userId, user);
+        userRepository.save(user);
     }
 
     @Override
     public List<User> readAll() {
-        return new ArrayList<>(USER_HASH_MAP.values());
+        return userRepository.findAll();
     }
 
     @Override
     public User read(String id) {
-        return USER_HASH_MAP.get(id);
+        return userRepository.getOne(id);
     }
 
     @Override
     public boolean update(User user, String id) {
-        if (USER_HASH_MAP.containsKey(id)) {
+        if (userRepository.existsById(id)) {
             user.setId(id);
-            USER_HASH_MAP.put(id, user);
+            userRepository.save(user);
             return true;
         }
-
         return false;
     }
 
     @Override
     public boolean delete(String id) {
-        return USER_HASH_MAP.remove(id) != null;
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
+
 }
