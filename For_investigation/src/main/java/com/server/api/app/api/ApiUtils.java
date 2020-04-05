@@ -23,8 +23,8 @@ public class ApiUtils {
         }
 
         return Pattern.compile("&").splitAsStream(query)
-            .map(s -> Arrays.copyOf(s.split("="), 2))
-            .collect(groupingBy(s -> decode(s[0]), mapping(s -> decode(s[1]), toList())));
+                .map(s -> Arrays.copyOf(s.split("="), 2))
+                .collect(groupingBy(s -> decode(s[0]), mapping(s -> decode(s[1]), toList())));
 
     }
 

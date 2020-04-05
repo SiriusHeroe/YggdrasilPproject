@@ -23,7 +23,7 @@ public abstract class Handler {
 
     public void handle(HttpExchange exchange) {
         Try.run(() -> execute(exchange))
-            .onFailure(thr -> exceptionHandler.handle(thr, exchange));
+                .onFailure(thr -> exceptionHandler.handle(thr, exchange));
     }
 
     protected abstract void execute(HttpExchange exchange) throws Exception;
@@ -31,12 +31,12 @@ public abstract class Handler {
 
     protected <T> T readRequest(InputStream is, Class<T> type) {
         return Try.of(() -> objectMapper.readValue(is, type))
-            .getOrElseThrow(ApplicationExceptions.invalidRequest());
+                .getOrElseThrow(ApplicationExceptions.invalidRequest());
     }
 
     protected <T> byte[] writeResponse(T response) {
         return Try.of(() -> objectMapper.writeValueAsBytes(response))
-            .getOrElseThrow(ApplicationExceptions.invalidRequest());
+                .getOrElseThrow(ApplicationExceptions.invalidRequest());
     }
 
     protected static Headers getHeaders(String key, String value) {

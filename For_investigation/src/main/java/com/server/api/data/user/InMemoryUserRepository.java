@@ -16,10 +16,10 @@ public class InMemoryUserRepository implements UserRepository {
     public String create(NewUser newUser) {
         String id = UUID.randomUUID().toString();
         User user = User.builder()
-            .id(id)
-            .login(newUser.getLogin())
-            .password(newUser.getPassword())
-            .build();
+                .id(id)
+                .login(newUser.getLogin())
+                .password(newUser.getPassword())
+                .build();
         USERS_STORE.put(newUser.getLogin(), user);
 
         return id;

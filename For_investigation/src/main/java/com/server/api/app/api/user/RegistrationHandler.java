@@ -35,7 +35,7 @@ public class RegistrationHandler extends Handler {
             response = super.writeResponse(e.getBody());
         } else {
             throw ApplicationExceptions.methodNotAllowed(
-                "Method " + exchange.getRequestMethod() + " is not allowed for " + exchange.getRequestURI()).get();
+                    "Method " + exchange.getRequestMethod() + " is not allowed for " + exchange.getRequestURI()).get();
         }
 
         OutputStream os = exchange.getResponseBody();
@@ -47,15 +47,15 @@ public class RegistrationHandler extends Handler {
         com.server.api.app.api.user.RegistrationRequest registerRequest = super.readRequest(is, com.server.api.app.api.user.RegistrationRequest.class);
 
         NewUser user = NewUser.builder()
-            .login(registerRequest.getLogin())
-            .password(PasswordEncoder.encode(registerRequest.getPassword()))
-            .build();
+                .login(registerRequest.getLogin())
+                .password(PasswordEncoder.encode(registerRequest.getPassword()))
+                .build();
 
         String userId = userService.create(user);
 
         RegistrationResponse response = new RegistrationResponse(userId);
 
         return new ResponseEntity<>(response,
-            getHeaders(Constants.CONTENT_TYPE, Constants.APPLICATION_JSON), StatusCode.OK);
+                getHeaders(Constants.CONTENT_TYPE, Constants.APPLICATION_JSON), StatusCode.OK);
     }
 }
