@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("tariff/api/v1")
 public class TariffController {
 
     private final TariffService tariffService;
@@ -29,7 +30,7 @@ public class TariffController {
     public ResponseEntity<List<Tariff>> read() {
         final List<Tariff> tariffs = tariffService.readAll();
 
-        return tariffs != null &&  !tariffs.isEmpty()
+        return tariffs != null && !tariffs.isEmpty()
                 ? new ResponseEntity<>(tariffs, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -44,7 +45,7 @@ public class TariffController {
     }
 
     @PutMapping(value = "/tariffs/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") String  id, @RequestBody Tariff tariff) {
+    public ResponseEntity<?> update(@PathVariable(name = "id") String id, @RequestBody Tariff tariff) {
         final boolean updated = tariffService.update(tariff, id);
 
         return updated
@@ -53,7 +54,7 @@ public class TariffController {
     }
 
     @DeleteMapping(value = "/tariffs/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") String  id) {
+    public ResponseEntity<?> delete(@PathVariable(name = "id") String id) {
         final boolean deleted = tariffService.delete(id);
 
         return deleted

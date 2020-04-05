@@ -7,18 +7,21 @@ import java.util.List;
 public interface TariffService {
     /**
      * Create new Tarif
+     *
      * @param tariff - Tarif for creating
      */
     void create(Tariff tariff);
 
     /**
      * Return list with all Tarifs
+     *
      * @return list Tarifs
      */
     List<Tariff> readAll();
 
     /**
      * Return Tarif by id
+     *
      * @param id - ID Tarif
      * @return - body Tarif by ID
      */
@@ -26,14 +29,16 @@ public interface TariffService {
 
     /**
      * Update Tarif by ID,
+     *
      * @param tariff - new Tarif param in json
-     * @param id - id Tarif
+     * @param id     - id Tarif
      * @return - true if update was success, else false
      */
     boolean update(Tariff tariff, String id);
 
     /**
      * Delete Tarif by ID
+     *
      * @param id - id Tarif
      * @return - true if Tarif was deleted, else false
      */

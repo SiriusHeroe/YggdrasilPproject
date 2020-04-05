@@ -11,8 +11,8 @@ services:
     volumes:
       - ./docker/payara/logs/:/opt/payara41/glassfish/domains/yggdrasil_domain/logs
       - ./target:/opt/payara/target
-#    environment:
-#      - DISPATCHER_SERVICE_URL=http://feg-api-mock:8080/api-dispatcher
+    #    environment:
+    #      - DISPATCHER_SERVICE_URL=http://feg-api-mock:8080/api-dispatcher
     expose:
       - "9090"
     ports:
@@ -63,9 +63,9 @@ services:
 
 
 networks:
-   besynext_network:
-     external: true
-     name: mindmeal_network
+  besynext_network:
+    external: true
+    name: mindmeal_network
 
 
 

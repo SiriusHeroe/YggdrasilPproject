@@ -10,7 +10,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
-public class ContractServiceImpl implements ContractService{
+public class ContractServiceImpl implements ContractService {
 
     private final ContractRepository contractRepository;
 

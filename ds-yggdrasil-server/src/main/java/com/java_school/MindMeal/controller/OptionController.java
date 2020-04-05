@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("option/api/v1")
 public class OptionController {
 
-        private final OptionService optionService;
+    private final OptionService optionService;
 
     @Autowired
     public OptionController(OptionService optionService) {
@@ -29,7 +30,7 @@ public class OptionController {
     public ResponseEntity<List<Option>> read() {
         final List<Option> options = optionService.readAll();
 
-        return options != null &&  !options.isEmpty()
+        return options != null && !options.isEmpty()
                 ? new ResponseEntity<>(options, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -44,7 +45,7 @@ public class OptionController {
     }
 
     @PutMapping(value = "/option/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") String  id, @RequestBody Option option) {
+    public ResponseEntity<?> update(@PathVariable(name = "id") String id, @RequestBody Option option) {
         final boolean updated = optionService.update(option, id);
 
         return updated
@@ -53,7 +54,7 @@ public class OptionController {
     }
 
     @DeleteMapping(value = "/option/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") String  id) {
+    public ResponseEntity<?> delete(@PathVariable(name = "id") String id) {
         final boolean deleted = optionService.delete(id);
 
         return deleted

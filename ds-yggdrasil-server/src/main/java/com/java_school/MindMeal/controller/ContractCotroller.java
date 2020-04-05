@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("contract/api/v1")
 public class ContractCotroller {
     private final ContractService contractService;
 
@@ -28,7 +29,7 @@ public class ContractCotroller {
     public ResponseEntity<List<Contract>> read() {
         final List<Contract> contracts = contractService.readAll();
 
-        return contracts != null &&  !contracts.isEmpty()
+        return contracts != null && !contracts.isEmpty()
                 ? new ResponseEntity<>(contracts, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -43,7 +44,7 @@ public class ContractCotroller {
     }
 
     @PutMapping(value = "/contracts/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") String  id, @RequestBody Contract contracts) {
+    public ResponseEntity<?> update(@PathVariable(name = "id") String id, @RequestBody Contract contracts) {
         final boolean updated = contractService.update(contracts, id);
 
         return updated
@@ -52,7 +53,7 @@ public class ContractCotroller {
     }
 
     @DeleteMapping(value = "/contracts/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") String  id) {
+    public ResponseEntity<?> delete(@PathVariable(name = "id") String id) {
         final boolean deleted = contractService.delete(id);
 
         return deleted

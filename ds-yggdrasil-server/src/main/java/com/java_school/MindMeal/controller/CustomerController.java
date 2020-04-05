@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("customer/api/v1")
 public class CustomerController {
     private final CustomerService CustomerService;
 
@@ -28,7 +29,7 @@ public class CustomerController {
     public ResponseEntity<List<Customer>> read() {
         final List<Customer> customers = CustomerService.readAll();
 
-        return customers != null &&  !customers.isEmpty()
+        return customers != null && !customers.isEmpty()
                 ? new ResponseEntity<>(customers, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -43,7 +44,7 @@ public class CustomerController {
     }
 
     @PutMapping(value = "/customers/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") String  id, @RequestBody Customer customers) {
+    public ResponseEntity<?> update(@PathVariable(name = "id") String id, @RequestBody Customer customers) {
         final boolean updated = CustomerService.update(customers, id);
 
         return updated
@@ -52,7 +53,7 @@ public class CustomerController {
     }
 
     @DeleteMapping(value = "/customers/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") String  id) {
+    public ResponseEntity<?> delete(@PathVariable(name = "id") String id) {
         final boolean deleted = CustomerService.delete(id);
 
         return deleted

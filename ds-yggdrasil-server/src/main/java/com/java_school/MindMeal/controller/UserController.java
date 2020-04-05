@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
+@RequestMapping("user/api/v1")
 public class UserController {
     private final UserService userService;
 
@@ -29,7 +30,7 @@ public class UserController {
     public ResponseEntity<List<User>> read() {
         final List<User> users = userService.readAll();
 
-        return users != null &&  !users.isEmpty()
+        return users != null && !users.isEmpty()
                 ? new ResponseEntity<>(users, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -44,7 +45,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/users/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") String  id, @RequestBody User user) {
+    public ResponseEntity<?> update(@PathVariable(name = "id") String id, @RequestBody User user) {
         final boolean updated = userService.update(user, id);
 
         return updated
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/users/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") String  id) {
+    public ResponseEntity<?> delete(@PathVariable(name = "id") String id) {
         final boolean deleted = userService.delete(id);
 
         return deleted
