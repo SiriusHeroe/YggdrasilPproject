@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.java_school.MindMeal</groupId>
-    <artifactId>fe-yggdrasil-client</artifactId>
+    <artifactId>fe-yggdrasil-web-client</artifactId>
     <packaging>jar</packaging>
     <version>0.1.3-SNAPSHOT</version>
 
-    <name>ds-yggdrasil-ui</name>
+    <name>fe-yggdrasil-web-client</name>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
