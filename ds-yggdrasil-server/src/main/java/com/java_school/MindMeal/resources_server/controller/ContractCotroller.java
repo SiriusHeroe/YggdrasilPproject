@@ -1,7 +1,7 @@
-package com.java_school.MindMeal.controller;
+package com.java_school.MindMeal.resources_server.controller;
 
-import com.java_school.MindMeal.model.Contract;
-import com.java_school.MindMeal.service.ContractService;
+import com.java_school.MindMeal.resources_server.model.Contract;
+import com.java_school.MindMeal.resources_server.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

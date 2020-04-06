@@ -1,7 +1,7 @@
-package com.java_school.MindMeal.service;
+package com.java_school.MindMeal.resources_server.service;
 
-import com.java_school.MindMeal.model.Customer;
-import com.java_school.MindMeal.repository.CustomerRepository;
+import com.java_school.MindMeal.resources_server.model.Customer;
+import com.java_school.MindMeal.resources_server.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;

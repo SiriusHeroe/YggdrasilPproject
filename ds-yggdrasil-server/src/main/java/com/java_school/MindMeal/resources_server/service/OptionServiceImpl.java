@@ -1,7 +1,7 @@
-package com.java_school.MindMeal.service;
+package com.java_school.MindMeal.resources_server.service;
 
-import com.java_school.MindMeal.model.Option;
-import com.java_school.MindMeal.repository.OptionRepository;
+import com.java_school.MindMeal.resources_server.model.Option;
+import com.java_school.MindMeal.resources_server.repository.OptionRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;

@@ -1,9 +1,8 @@
-package com.java_school.MindMeal.service;
+package com.java_school.MindMeal.resources_server.service;
 
-import com.java_school.MindMeal.model.User;
+import com.java_school.MindMeal.resources_server.model.User;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface UserService {
 

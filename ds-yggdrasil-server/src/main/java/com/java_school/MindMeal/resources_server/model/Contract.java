@@ -1,4 +1,4 @@
-package com.java_school.MindMeal.model;
+package com.java_school.MindMeal.resources_server.model;
 
 import org.hibernate.annotations.GenericGenerator;
 

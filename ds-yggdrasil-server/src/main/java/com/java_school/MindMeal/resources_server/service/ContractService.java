@@ -1,6 +1,6 @@
-package com.java_school.MindMeal.service;
+package com.java_school.MindMeal.resources_server.service;
 
-import com.java_school.MindMeal.model.Contract;
+import com.java_school.MindMeal.resources_server.model.Contract;
 
 
 import java.util.List;

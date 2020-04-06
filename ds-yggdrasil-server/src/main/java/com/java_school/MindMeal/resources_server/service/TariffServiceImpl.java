@@ -1,7 +1,7 @@
-package com.java_school.MindMeal.service;
+package com.java_school.MindMeal.resources_server.service;
 
-import com.java_school.MindMeal.model.Tariff;
-import com.java_school.MindMeal.repository.TariffRepository;
+import com.java_school.MindMeal.resources_server.model.Tariff;
+import com.java_school.MindMeal.resources_server.repository.TariffRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;

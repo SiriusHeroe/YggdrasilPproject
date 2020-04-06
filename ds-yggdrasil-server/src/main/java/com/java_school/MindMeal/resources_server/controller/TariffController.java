@@ -1,7 +1,7 @@
-package com.java_school.MindMeal.controller;
+package com.java_school.MindMeal.resources_server.controller;
 
-import com.java_school.MindMeal.model.Tariff;
-import com.java_school.MindMeal.service.TariffService;
+import com.java_school.MindMeal.resources_server.model.Tariff;
+import com.java_school.MindMeal.resources_server.service.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

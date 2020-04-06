@@ -14,7 +14,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <start-class>com.MindMeal.Application</start-class>
+        <start-class>com.java_school.MindMeal.resources_server.ExecuteApplication</start-class>
     </properties>
 
     <parent>
